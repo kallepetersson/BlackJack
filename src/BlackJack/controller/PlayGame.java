@@ -13,33 +13,32 @@ public class PlayGame implements ICardDealedObserver {
     public PlayGame(Game a_game, IView a_view) {
         game = a_game;
         view = a_view;
+        game.Addsubscribers(this);
+
     }
 
     public boolean Play() {
-        game.Addsubscribers(this);
 
         IView.action input;
         view.DisplayWelcomeMessage();
         view.DisplayDealerHand(game.GetDealerHand(), game.GetDealerScore());
         view.DisplayPlayerHand(game.GetPlayerHand(), game.GetPlayerScore());
 
-        while (true) {
-            if (game.IsGameOver()) {
-                view.DisplayGameOver(game.IsDealerWinner());
-            }
-
-            input = view.action();
-
-            if (input == IView.action.PLAY) {
-                game.NewGame();
-            } else if (input == IView.action.HIT) {
-                game.Hit();
-            } else if (input == IView.action.STAND) {
-                game.Stand();
-            } else if (input == IView.action.QUIT)
-                break;
+        if (game.IsGameOver()) {
+            view.DisplayGameOver(game.IsDealerWinner());
         }
-        return false;
+
+        input = view.action();
+
+        if (input == IView.action.PLAY) {
+            game.NewGame();
+        } else if (input == IView.action.HIT) {
+            game.Hit();
+        } else if (input == IView.action.STAND) {
+            game.Stand();
+        } else if (input == IView.action.QUIT)
+            return false;
+        return true;
     }
 
 
