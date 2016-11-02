@@ -41,7 +41,9 @@ public class PlayGame implements ICardDealedObserver {
         return true;
     }
 
-
+    /**
+     * Delay every time a card is dealt.
+     */
     public void CardDealt() {
         try {
             Thread.sleep(1500);
