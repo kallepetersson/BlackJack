@@ -42,7 +42,7 @@ public class PlayGame implements ICardDealedObserver {
     }
 
     /**
-     * Delay every time a card is dealt
+     * Delay every time a card is dealt.
      */
     public void CardDealt() {
         try {
